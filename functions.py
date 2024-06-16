@@ -28,3 +28,21 @@ def get_shot_date(file_path: str) -> str:
 
 def is_jpg_file(file_path) -> bool:
     return ".jpg" in file_path.lower()
+
+def get_folder_names(extensions: list) -> list:
+
+    folder_names = list()
+
+    for extension in extensions:
+
+        folder_names.append(extension.replace('.', ''))
+
+    return folder_names
+
+
+def create_folders(path, folder_names):
+
+    for folder_name in folder_names:
+
+        folder = os.path.join(path, folder_name)    
+        os.makedirs(folder, exist_ok=True)

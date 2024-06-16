@@ -6,13 +6,9 @@ def main():
 
     SOURCE_PATH = 'images'
     EXTENSIONS = ['.CR3', '.JPG']
-    DESTINATION_PATH = 'final_images'
+    TARGET_PATH = 'final_images'
 
-    folder_cr3 = os.path.join(DESTINATION_PATH, 'CR3')
-    folder_jpg = os.path.join(DESTINATION_PATH, 'JPG')
-
-    os.makedirs(folder_cr3, exist_ok=True)
-    os.makedirs(folder_jpg, exist_ok=True)
+    f.create_folders(TARGET_PATH, f.get_folder_names(EXTENSIONS))
 
     files = os.listdir(SOURCE_PATH)
 
