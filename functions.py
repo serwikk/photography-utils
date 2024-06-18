@@ -14,6 +14,10 @@ def remove_extension(file: str, extensions: list) -> str:
 
     return file
 
+def get_extension(file: str) -> str:
+
+    return file.split('.')[-1]
+
 
 def get_shot_date(file_path: str) -> str:
 
@@ -40,9 +44,16 @@ def get_folder_names(extensions: list) -> list:
     return folder_names
 
 
-def create_folders(path, folder_names):
+def create_folders(folder_dictionary):
 
-    for folder_name in folder_names:
+    for folder_name in folder_dictionary:
 
-        folder = os.path.join(path, folder_name)    
-        os.makedirs(folder, exist_ok=True)
+        # folder = os.path.join(path, folder_name)    
+        os.makedirs(folder_name, exist_ok=True)
+
+def fill_dictionary(values_array, dictionary, path):
+    
+    for value in values_array:
+        dictionary[value] = f'{path}/{value}'
+
+    return dictionary

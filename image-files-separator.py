@@ -1,14 +1,21 @@
 import os
+import shutil
 import functions as f
 
 
 def main():
 
     SOURCE_PATH = 'images'
-    EXTENSIONS = ['.CR3', '.JPG']
+    EXTENSIONS = ['CR3', 'JPG']
     TARGET_PATH = 'final_images'
 
-    f.create_folders(TARGET_PATH, f.get_folder_names(EXTENSIONS))
+    COPY = True
+
+    EXTENSIONS_DICTIONARY = dict()
+
+    EXTENSIONS_DICTIONARY = f.fill_dictionary(EXTENSIONS, EXTENSIONS_DICTIONARY, TARGET_PATH)
+
+    f.create_folders(EXTENSIONS_DICTIONARY.values())
 
     files = os.listdir(SOURCE_PATH)
 
@@ -18,12 +25,16 @@ def main():
 
         file_path = f.get_full_file_path(SOURCE_PATH, file)
 
-        names_set.add(f.remove_extension(file, EXTENSIONS))
+        extension = f.get_extension(file)
+
+        if COPY:
+
+            shutil.copy(file_path, EXTENSIONS_DICTIONARY[extension])
         
-        if f.is_jpg_file(file_path):
-
-            f.get_shot_date(file_path)
-
+        else:
+            
+            shutil.move(file_path, EXTENSIONS_DICTIONARY[extension])
+        
 
 
 
