@@ -1,8 +1,11 @@
 import os
 from PIL import Image
+import logging
 
 
 def get_full_file_path(folder_path: str, file: str) -> str:
+
+    logging.info(os.path.join(os.path.abspath(folder_path), file))
 
     return os.path.join(os.path.abspath(folder_path), file)
 
@@ -48,8 +51,8 @@ def create_folders(folder_dictionary):
 
     for folder_name in folder_dictionary:
 
-        # folder = os.path.join(path, folder_name)    
         os.makedirs(folder_name, exist_ok=True)
+
 
 def fill_dictionary(values_array, dictionary, path):
     

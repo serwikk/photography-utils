@@ -2,6 +2,11 @@ import os
 import shutil
 import functions as f
 
+from logger import set_logger
+
+
+set_logger()
+
 
 def main():
 
