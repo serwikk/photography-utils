@@ -26,7 +26,7 @@ def main():
 
     names_set = set()
 
-    for file in files:
+    for file in files: 
 
         file_path = f.get_full_file_path(SOURCE_PATH, file)
 
