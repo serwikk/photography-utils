@@ -1,6 +1,7 @@
 import os
 import shutil
-import functions as f
+
+from PhotoManager import PhotoManager
 
 from logger import set_logger
 
@@ -11,16 +12,17 @@ set_logger()
 def main():
 
     SOURCE_PATH = 'images'
-    EXTENSIONS = ['CR3', 'JPG']
     TARGET_PATH = 'final_images'
-
     COPY = True
+
+    photomanager = PhotoManager(SOURCE_PATH, TARGET_PATH, COPY)
+
 
     EXTENSIONS_DICTIONARY = dict()
 
-    EXTENSIONS_DICTIONARY = f.fill_dictionary(EXTENSIONS, EXTENSIONS_DICTIONARY, TARGET_PATH)
+    EXTENSIONS_DICTIONARY = photomanager.fill_dictionary(photomanager.EXTENSIONS, EXTENSIONS_DICTIONARY, TARGET_PATH)
 
-    f.create_folders(EXTENSIONS_DICTIONARY.values())
+    photomanager.create_folders(EXTENSIONS_DICTIONARY.values())
 
     files = os.listdir(SOURCE_PATH)
 
@@ -28,11 +30,11 @@ def main():
 
     for file in files: 
 
-        file_path = f.get_full_file_path(SOURCE_PATH, file)
+        file_path = photomanager.get_full_file_path(SOURCE_PATH, file)
 
-        extension = f.get_extension(file)
+        extension = photomanager.get_extension(file)
 
-        if COPY:
+        if photomanager.COPY:
 
             shutil.copy(file_path, EXTENSIONS_DICTIONARY[extension])
         
